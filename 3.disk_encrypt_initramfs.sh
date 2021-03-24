@@ -17,10 +17,12 @@ SHA1SUM_ROOT="$(dd bs=4k count=$BLOCK_COUNT if=/dev/mmcblk0p2 | sha1sum)"
 dd bs=4k count=$BLOCK_COUNT if=/dev/mmcblk0p2 of=/dev/sda
 SHA1SUM_EXT="$(dd bs=4k count=$BLOCK_COUNT if=/dev/sda | sha1sum)"
 
+echo "123456" > /boot/cryptpasswd.txt
+
 if [ "$SHA1SUM_ROOT" == "$SHA1SUM_EXT" ]; then
 	echo "1.Sha1sums match."
-	cryptsetup --cipher aes-cbc-essiv:sha256 luksFormat /dev/mmcblk0p2
-	cryptsetup luksOpen /dev/mmcblk0p2 sdcard
+	cryptsetup --cipher aes-cbc-essiv:sha256 --key-file /boot/cryptpasswd.txt luksFormat /dev/mmcblk0p2
+	cryptsetup luksOpen --key-file /boot/cryptpasswd.txt /dev/mmcblk0p2 sdcard
 	dd bs=4k count=$BLOCK_COUNT if=/dev/sda of=/dev/mapper/sdcard
 	SHA1SUM_NEWROOT="$(dd bs=4k count=1516179 if=/dev/mapper/sdcard | sha1sum)"
 	if [ "$SHA1SUM_ROOT" == "$SHA1SUM_EXT" ]; then
