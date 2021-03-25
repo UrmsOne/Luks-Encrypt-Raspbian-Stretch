@@ -19,7 +19,7 @@ chmod +x /etc/initramfs-tools/hooks/resize2fs
 #blkid | sed -n '/dev\/mmcblk0p2/s/.*\ UUID=\"\([^\"]*\)\".*/\1/p'
 #change fstab from PARTUUID=XXXXXXXX-XX to the result of the command
 
-echo "123456" > /usr/share/tcltk/ptest.txt
+# echo "123456" > /usr/share/tcltk/ptest.txt
 
 
 #sudo -E CRYPTSETUP=y mkinitramfs -o /boot/initramfs.gz

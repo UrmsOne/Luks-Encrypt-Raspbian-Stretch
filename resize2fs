@@ -17,6 +17,7 @@ case "${1}" in
   ;;
 esac
 
+. "${CONFDIR}/initramfs.conf"
 . /usr/share/initramfs-tools/hook-functions
 
 copy_exec /sbin/resize2fs /sbin
@@ -36,3 +37,15 @@ if ${COMPATIBILITY}; then
   esac
   cp -r /lib/modules/${other_version} ${DESTDIR}/lib/modules/
 fi
+
+# prepare keyfile
+if [ ! -f "${DESTDIR}/lib/cryptsetup/scripts/loadkeyfile.sh" ]; then
+    if [ ! -d "${DESTDIR}/lib/cryptsetup/scripts" ]; then
+        mkdir -p "${DESTDIR}/lib/cryptsetup/scripts"
+    fi
+    cp /lib/cryptsetup/scripts/loadkeyfile.sh ${DESTDIR}/lib/cryptsetup/scripts/
+fi
+if [ ! -d "${DESTDIR}/root/" ]; then
+    mkdir -p ${DESTDIR}/root/
+fi
+cp /root/keyfile ${DESTDIR}/root/
