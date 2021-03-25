@@ -1,0 +1,2 @@
+# <target name> <source device>         <key file>      <options>
+sdcard /dev/mmcblk0p2 /root/keyfile luks,keyscript=/lib/cryptsetup/scripts/loadkeyfile.sh,initramfs

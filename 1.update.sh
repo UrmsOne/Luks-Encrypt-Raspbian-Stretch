@@ -10,8 +10,10 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+sed -i 's#https://raspbian.raspberrypi/org/#http://mirrors.tuna.tsinghua.edu.cn/raspbian/#' /etc/apt/sources.list
 apt-get update
-apt-get upgrade -y
+#apt-get upgrade -y
+
 #sudo rpi-update
 echo "Done. Reboot with: sudo reboot"
 #reboot #needed to load new kernel

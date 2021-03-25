@@ -110,6 +110,22 @@ This script rebuilds the 'initramfs' environment so that your pi will now automa
 * There is probably an easier way to do this using chroot so you don't need to reboot so much but I don't know how to do it yet.
 * I added 'expect' to the initramfs hook because I'll probably add another script to auto generate a strong password, it can be removed though.
 
+### Step 6: Automatically prompt for passphrase on boot without password
+
+Modify `/etc/crypttab`
+```
+sdcard /dev/mmcblk0p2 /root/keyfile luks,keyscript=/lib/cryptsetup/scripts/loadkeyfile.sh,initramfs
+```
+Run
+```
+update-initramfs -u -k all
+```
+Run
+```
+sudo /boot/install/5.rebuild_initram.sh
+```
+
+
 ## References
 * [Original forum post](https://www.raspberrypi.org/forums/viewtopic.php?t=219867)
 * [Raspberry Pi LUKS Root Encryption](https://robpol86.com/raspberry_pi_luks.html)
