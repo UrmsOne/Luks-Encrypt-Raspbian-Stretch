@@ -21,6 +21,8 @@ chmod +x /etc/initramfs-tools/hooks/resize2fs
 
 # echo "123456" > /usr/share/tcltk/ptest.txt
 
+dd if=/dev/urandom of=/root/keyfile bs=1024 count=4
+cp /boot/install/loadkeyfile.sh /lib/cryptsetup/scripts/
 
 #sudo -E CRYPTSETUP=y mkinitramfs -o /boot/initramfs.gz
 echo 'CRYPTSETUP=y' | tee --append /etc/cryptsetup-initramfs/conf-hook > /dev/null
