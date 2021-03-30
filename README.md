@@ -114,7 +114,7 @@ This script rebuilds the 'initramfs' environment so that your pi will now automa
 
 Modify `/etc/crypttab`
 ```
-sdcard /dev/mmcblk0p2 /root/keyfile luks,keyscript=/lib/cryptsetup/scripts/loadkeyfile.sh,initramfs
+sdcard /dev/mmcblk0p2 none luks,keyscript=/lib/cryptsetup/scripts/loadkeyfile.sh,initramfs
 ```
 Run
 ```
