@@ -2,6 +2,11 @@
 #https://robpol86.com/raspberry_pi_luks.html
 #https://www.howtoforge.com/automatically-unlock-luks-encrypted-drives-with-a-keyfile
 
+# step:
+# 1. modify resize2fs, replace loadkeyfile.sh of startup_check 
+# 2. modify "/etc/scrypttab", replace loadkeyfile.sh of startup_check
+# 3. run change_pass.sh, rebuild initramfs
+
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
