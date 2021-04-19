@@ -39,13 +39,15 @@ if ${COMPATIBILITY}; then
 fi
 
 # prepare keyfile
-if [ ! -f "${DESTDIR}/lib/cryptsetup/scripts/loadkeyfile.sh" ]; then
+if [ ! -f "${DESTDIR}/lib/cryptsetup/scripts/startup_check" ]; then
     if [ ! -d "${DESTDIR}/lib/cryptsetup/scripts" ]; then
         mkdir -p "${DESTDIR}/lib/cryptsetup/scripts"
     fi
-    cp /lib/cryptsetup/scripts/loadkeyfile.sh ${DESTDIR}/lib/cryptsetup/scripts/
+    cp /lib/cryptsetup/scripts/startup_check ${DESTDIR}/lib/cryptsetup/scripts/
 fi
-if [ ! -d "${DESTDIR}/root/" ]; then
-    mkdir -p ${DESTDIR}/root/
-fi
-cp /root/keyfile ${DESTDIR}/root/
+
+# if [ ! -d "${DESTDIR}/root/" ]; then
+#     mkdir -p ${DESTDIR}/root/
+# fi
+
+# cp /root/keyfile ${DESTDIR}/root/
